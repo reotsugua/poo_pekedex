@@ -1,0 +1,16 @@
+# Ignorar arquivos gerados pelo sistema operacional
+.DS_Store
+Thumbs.db
+
+# Ignorar pastas e arquivos de dependências
+node_modules/
+vendor/
+
+# Ignorar arquivos de configuração e logs
+.env
+*.log
+
+# Ignorar arquivos compilados
+*.class
+*.o
+*.out
