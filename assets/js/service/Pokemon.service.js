@@ -6,7 +6,6 @@ export class ServicePokemon {
 
         if (!response.ok) throw new Error(`Erro ao obter dados do pokemon, tente novamente!`);
 
-        const data = await response.json();
-        return data;
+        return response.json();
     }
 }

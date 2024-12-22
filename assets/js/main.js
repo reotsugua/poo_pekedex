@@ -31,8 +31,8 @@ const experience = document.getElementById('pokemon-experience');
 const abilities = document.getElementById('pokemon-abilities');
 
 // FUNÇÔES UTILITARIAS
-const processSelectedPokemon = async (selectedValue) => {
-    return await new ServicePokemon().getPokemon(selectedValue);
+const processSelectedPokemon = (selectedValue) => {
+    return new ServicePokemon().getPokemon(selectedValue);
 }
 
 const createPokemon = (dataPokemon) => {
