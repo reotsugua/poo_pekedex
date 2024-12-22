@@ -1,4 +1,4 @@
-export class Pokemon {
+export default class Pokemon {
     #name;
     #abilities;
     #height;
@@ -35,9 +35,5 @@ export class Pokemon {
         // return this.#sprites.other['official-artwork'].front_default;
         // return this.#sprites.other.home.front_default;
         return this.#sprites.other.showdown.front_default;
-    }
-
-    getSummary() {
-        return `${this.#name} is ${this.#height} meters tall, with ${this.#baseExperience} base experience.`;
     }
 }

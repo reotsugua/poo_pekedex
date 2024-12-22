@@ -1,9 +1,5 @@
 import { processSelectedPokemon, processSelectedGeneration, createPokemon } from "./core/controller/Pokemons.controller.js";
-import { 
-    populatePokemonsOfGen,
-    startLoading,
-    renderPokemon
- } from "./shared/utils.js";
+import { populatePokemonsOfGen, startLoading, renderPokemon } from "./shared/utils.js";
 
 // VARIAVEIS GLOBAIS
 const query = {
@@ -23,6 +19,7 @@ const query = {
     'hisui': '?limit=21&offset=1253',
     'others2': '?limit=500&offset=1274',
 }
+
 
 // ELEMENTS DOM
 const selectGeneration = document.getElementById('select-gens');

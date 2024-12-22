@@ -1,4 +1,4 @@
-export class ServicePokemon {
+export default class ServicePokemon {
     #baseUrl = 'https://pokeapi.co/api/v2';
 
     async getPokemon(name) {
@@ -7,5 +7,5 @@ export class ServicePokemon {
         if (!response.ok) throw new Error(`Erro ao obter dados do pokemon, tente novamente!`);
 
         return response.json();
-    }
+    };
 }
