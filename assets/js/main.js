@@ -60,8 +60,20 @@ selectGeneration.addEventListener('change', async event =>{
 
     const query = {
         'Gen1' : '?limit=151&offset=0',
-        'Gen2' : '?limit=251&offset=151',
-        'Gen3' : '?limit=351&offset=251',
+        'Gen2' : '?limit=100&offset=151',
+        'Gen3' : '?limit=135&offset=251',
+        'Gen4' : '?limit=107&offset=386',
+        'Gen5' : '?limit=156&offset=493',
+        'Gen6' : '?limit=72&offset=649',
+        'Gen7' : '?limit=88&offset=721',
+        'Gen8' : '?limit=89&offset=809',
+        'others' : '?limit=32&offset=1025',
+        'mega' : '?limit=58&offset=1057',
+        'alola' : '?limit=70&offset=1115',
+        'Galar' : '?limit=20&offset=1185',
+        'Gmax' : '?limit=48&offset=1205',
+        'hisui' : '?limit=21&offset=1253',
+        'others2' : '?limit=500&offset=1274',
     }
    
     
