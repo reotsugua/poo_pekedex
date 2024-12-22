@@ -17,20 +17,26 @@
 <body>
   <header class="pokemon-head">
     <h3 class="pokemon-title">GetPokemon:</h3>
+    <select id="select-gens" required>
+      <option value="" selected disabled>Selecione</option>
+      <option value="Gen1">Geração 1</option>
+      <option value="Gen2">Geração 2</option>
+      <option value="Gen3">Geração 3</option>
+    </select>
     <select id="select-options" required>
       <option value="" selected disabled>Selecione</option>
-      <option value="bulbasaur">bulbasaur</option>
+      <!-- <option value="bulbasaur">bulbasaur</option>
       <option value="charmander">charmander</option>
       <option value="squirtle">squirtle</option>
-      <option value="charizard">charizard</option>
+      <option value="charizard">charizard</option> -->
     </select>
   </header>
   <main class="pokemon-main">
     <h1 class="pokemon-properties__value" id="pokemon-name">-</h1>
     <div class="pokemon-row">
-      <div class="pokemon-properties">
+      <div class="pokemon-properties" style="display: flex; justify-content: space-around;">
         <img src="assets/img/150x150.png" alt="Pokemon" class="pokemon-image" id="pokemon-image"/>
-        <img src="assets/img/loading_pokemons.gif" alt="Loading" class="pokemon-image" id="loading-image" style="display: none;"/>
+        <img src="assets/img/loading_pokemons.gif" alt="Loading" id="loading-image" style="display: none; width: inherit;"/>
       </div>
       <div class="pokemon-properties">
         <h2 class="pokemon-subtitle">Propriedades</h2>

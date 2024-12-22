@@ -2,6 +2,7 @@ import { Pokemon } from "./model/Pokemon.model.js";
 import { ServicePokemon } from "./service/Pokemon.service.js";
 
 // ELEMENTS DOM
+const selectGeneration = document.getElementById('select-gens');
 const selectPokemon = document.getElementById('select-options');
 const name = document.getElementById('pokemon-name');
 const image = document.getElementById('pokemon-image');
@@ -53,6 +54,28 @@ const changePokemon = async event => {
 
 // EVENTOS
 selectPokemon.addEventListener('change', changePokemon);
+selectGeneration.addEventListener('change', async event =>{
+    selectPokemon.innerHTML = '<option value="" selected disabled>Selecione</option>';
+    event.target.value
+
+    const query = {
+        'Gen1' : '?limit=151&offset=0',
+        'Gen2' : '?limit=251&offset=151',
+        'Gen3' : '?limit=351&offset=251',
+    }
+   
+    
+    const service = new ServicePokemon();
+    const {results} = await service.getListPokemons(query[event.target.value])
+    const listNamerPokemons = results.map((item)=>item.name)
+    listNamerPokemons.forEach(pokemon => {
+        const option = new Option(pokemon, pokemon.toLowerCase()); // Texto visível e valor em minúsculo
+        selectPokemon.add(option);
+    });
+    
+    
+    
+});
 
 
 
