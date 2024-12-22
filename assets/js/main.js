@@ -1,5 +1,9 @@
-import { Pokemon } from "./model/Pokemon.model.js";
-import { ServicePokemon } from "./service/Pokemon.service.js";
+import { processSelectedPokemon, processSelectedGeneration, createPokemon } from "./core/controller/Pokemons.controller.js";
+import { 
+    populatePokemonsOfGen,
+    startLoading,
+    renderPokemon
+ } from "./shared/utils.js";
 
 // VARIAVEIS GLOBAIS
 const query = {
@@ -23,62 +27,29 @@ const query = {
 // ELEMENTS DOM
 const selectGeneration = document.getElementById('select-gens');
 const selectPokemon = document.getElementById('select-options');
-const name = document.getElementById('pokemon-name');
-const image = document.getElementById('pokemon-image');
-const loading = document.getElementById('loading-image');
-const height = document.getElementById('pokemon-height');
-const experience = document.getElementById('pokemon-experience');
-const abilities = document.getElementById('pokemon-abilities');
+const elements = {
+    image: document.getElementById('pokemon-image'),
+    name: document.getElementById('pokemon-name'),
+    height: document.getElementById('pokemon-height'),
+    experience: document.getElementById('pokemon-experience'),
+    abilities: document.getElementById('pokemon-abilities'),
+    loading: document.getElementById('loading-image'),
+};
 
-// FUNÇÔES UTILITARIAS
-const processSelectedPokemon = (selectedValue) => {
-    return new ServicePokemon().getPokemon(selectedValue);
-}
-
-const createPokemon = (dataPokemon) => {
-    const { name, abilities, height, base_experience, sprites } = dataPokemon;
-    return new Pokemon(name, abilities, height, base_experience, sprites);
-}
-
-const renderPokemon = pokemon => {
-    image.src = pokemon.sprites;
-    name.textContent = pokemon.name ?? '-';
-    height.textContent = `${pokemon.height ?? '-'} m`;
-    experience.textContent = pokemon.baseExperience ?? '-';
-    abilities.textContent = pokemon.abilities ?? '-';
-    loading.style.display = "none";
-    image.style.display = "block";
-}
-
-const startLoading = () => {
-    image.style.display = "none";
-    loading.style.display = "block";
-    name.textContent = 'Carregando...';
-    height.textContent = '...';
-    experience.textContent = '...';
-    abilities.textContent = '...';
-}
-
-const populatePokemonsOfGen = arr => {
-    selectPokemon.innerHTML = '<option value="" selected disabled>Selecione</option>';
-
-    const options = arr.map(pokemon => new Option(pokemon.toUpperCase(), pokemon.toLowerCase()));
-    selectPokemon.append(...options);
-}
 
 // FUNÇÔES PRINCIPAIS
 const changeGenerations = async event => {
-    const { results: pokemonsMinInfo } = await processSelectedPokemon(query[event.target.value]);
+    const { results: pokemonsMinInfo } = await processSelectedGeneration(query[event.target.value]);
 
-    populatePokemonsOfGen(pokemonsMinInfo.map(({ name }) => name));
+    populatePokemonsOfGen(pokemonsMinInfo.map(({ name }) => name), selectPokemon);
 }
 
 const changePokemon = async event => {
-    startLoading();
+    startLoading(elements);
 
     try {
         const pokemon = createPokemon(await processSelectedPokemon(event.target.value));
-        renderPokemon(pokemon);
+        renderPokemon(pokemon, elements);
     } catch (error) {
         alert(error.message);
     }
