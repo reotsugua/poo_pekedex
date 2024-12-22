@@ -32,8 +32,9 @@ export class Pokemon {
     }
 
     get sprites() {      
-        return this.#sprites.other['official-artwork'].front_default;
+        // return this.#sprites.other['official-artwork'].front_default;
         // return this.#sprites.other.home.front_default;
+        return this.#sprites.other.showdown.front_default;
     }
 
     getSummary() {

@@ -1,8 +1,6 @@
 import { Pokemon } from "./model/Pokemon.model.js";
 import { ServicePokemon } from "./service/Pokemon.service.js";
 
-// VARIAVEIS GLOVAIS
-
 // ELEMENTS DOM
 const selectPokemon = document.getElementById('select-options');
 const name = document.getElementById('pokemon-name');
@@ -24,13 +22,14 @@ const createPokemon = (dataPokemon) => {
 
 const renderPokemon = pokemon => {
     image.src = pokemon.sprites;
-    name.textContent = pokemon.name;
-    height.textContent = `${pokemon.height} m`;
-    experience.textContent = pokemon.baseExperience;
-    abilities.textContent = pokemon.abilities;
+    name.textContent = pokemon.name ?? '-';
+    height.textContent = `${pokemon.height ?? '-'} m`;
+    experience.textContent = pokemon.baseExperience ?? '-';
+    abilities.textContent = pokemon.abilities ?? '-';
     loading.style.display = "none";
     image.style.display = "block";
 }
+
 const startLoading = () => {
     image.style.display = "none";
     loading.style.display = "block";
@@ -43,16 +42,13 @@ const startLoading = () => {
 // FUNÇÔES PRINCIPAIS
 const changePokemon = async event => {
     startLoading();
-    
+
     try {
         const pokemon = createPokemon(await processSelectedPokemon(event.target.value));
-        renderPokemon(pokemon)
-        
-
+        renderPokemon(pokemon);
     } catch (error) {
         alert(error.message);
     }
-
 }
 
 // EVENTOS
