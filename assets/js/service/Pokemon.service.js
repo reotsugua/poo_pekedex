@@ -9,13 +9,4 @@ export class ServicePokemon {
         const data = await response.json();
         return data;
     }
-
-    async getListPokemons(query) {
-        const response  = await fetch(`${this.#baseUrl}/pokemon/${query}`);
-
-        if (!response.ok) throw new Error(`Erro ao obter dados do pokemon, tente novamente!`);
-
-        const data = await response.json();
-        return data;
-    }
 }

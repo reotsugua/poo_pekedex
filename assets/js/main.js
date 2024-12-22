@@ -1,6 +1,25 @@
 import { Pokemon } from "./model/Pokemon.model.js";
 import { ServicePokemon } from "./service/Pokemon.service.js";
 
+// VARIAVEIS GLOBAIS
+const query = {
+    'Gen1': '?limit=151&offset=0',
+    'Gen2': '?limit=100&offset=151',
+    'Gen3': '?limit=135&offset=251',
+    'Gen4': '?limit=107&offset=386',
+    'Gen5': '?limit=156&offset=493',
+    'Gen6': '?limit=72&offset=649',
+    'Gen7': '?limit=88&offset=721',
+    'Gen8': '?limit=89&offset=809',
+    'others': '?limit=32&offset=1025',
+    'mega': '?limit=58&offset=1057',
+    'alola': '?limit=70&offset=1115',
+    'Galar': '?limit=20&offset=1185',
+    'Gmax': '?limit=48&offset=1205',
+    'hisui': '?limit=21&offset=1253',
+    'others2': '?limit=500&offset=1274',
+}
+
 // ELEMENTS DOM
 const selectGeneration = document.getElementById('select-gens');
 const selectPokemon = document.getElementById('select-options');
@@ -40,7 +59,20 @@ const startLoading = () => {
     abilities.textContent = '...';
 }
 
+const populatePokemonsOfGen = arr => {
+    selectPokemon.innerHTML = '<option value="" selected disabled>Selecione</option>';
+
+    const options = arr.map(pokemon => new Option(pokemon.toUpperCase(), pokemon.toLowerCase()));
+    selectPokemon.append(...options);
+}
+
 // FUNÇÔES PRINCIPAIS
+const changeGenerations = async event => {
+    const { results: pokemonsMinInfo } = await processSelectedPokemon(query[event.target.value]);
+
+    populatePokemonsOfGen(pokemonsMinInfo.map(({ name }) => name));
+}
+
 const changePokemon = async event => {
     startLoading();
 
@@ -52,42 +84,10 @@ const changePokemon = async event => {
     }
 }
 
-// EVENTOS
-selectPokemon.addEventListener('change', changePokemon);
-selectGeneration.addEventListener('change', async event =>{
-    selectPokemon.innerHTML = '<option value="" selected disabled>Selecione</option>';
-    event.target.value
 
-    const query = {
-        'Gen1' : '?limit=151&offset=0',
-        'Gen2' : '?limit=100&offset=151',
-        'Gen3' : '?limit=135&offset=251',
-        'Gen4' : '?limit=107&offset=386',
-        'Gen5' : '?limit=156&offset=493',
-        'Gen6' : '?limit=72&offset=649',
-        'Gen7' : '?limit=88&offset=721',
-        'Gen8' : '?limit=89&offset=809',
-        'others' : '?limit=32&offset=1025',
-        'mega' : '?limit=58&offset=1057',
-        'alola' : '?limit=70&offset=1115',
-        'Galar' : '?limit=20&offset=1185',
-        'Gmax' : '?limit=48&offset=1205',
-        'hisui' : '?limit=21&offset=1253',
-        'others2' : '?limit=500&offset=1274',
-    }
-   
-    
-    const service = new ServicePokemon();
-    const {results} = await service.getListPokemons(query[event.target.value])
-    const listNamerPokemons = results.map((item)=>item.name)
-    listNamerPokemons.forEach(pokemon => {
-        const option = new Option(pokemon, pokemon.toLowerCase()); // Texto visível e valor em minúsculo
-        selectPokemon.add(option);
-    });
-    
-    
-    
-});
+// EVENTOS
+selectGeneration.addEventListener('change', changeGenerations);
+selectPokemon.addEventListener('change', changePokemon);
 
 
 
