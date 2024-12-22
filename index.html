@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,15 +17,19 @@
 <body>
   <header class="pokemon-head">
     <h3 class="pokemon-title">GetPokemon:</h3>
-    <select id="select-options">
-      <option value="">Selecione</option>
+    <select id="select-options" required>
+      <option value="" selected disabled>Selecione</option>
+      <option value="bulbasaur">bulbasaur</option>
+      <option value="charmander">charmander</option>
+      <option value="squirtle">squirtle</option>
     </select>
   </header>
   <main class="pokemon-main">
     <h1 class="pokemon-properties__value" id="pokemon-name">-</h1>
     <div class="pokemon-row">
       <div class="pokemon-properties">
-        <img src="https://via.placeholder.com/150x150" alt="Pokemon" class="pokemon-image" id="pokemon-image"/>
+        <img src="assets/img/150x150.png" alt="Pokemon" class="pokemon-image" id="pokemon-image"/>
+        <img src="assets/img/loading_pokemons.gif" alt="Loading" class="pokemon-image" id="loading-image" style="display: none;"/>
       </div>
       <div class="pokemon-properties">
         <h2 class="pokemon-subtitle">Propriedades</h2>
